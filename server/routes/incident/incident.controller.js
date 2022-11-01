@@ -4,7 +4,11 @@ require("dotenv").config();
 
 //GET - http://localhost:4000/api/
 exports.listOfAllIncidents = function (request, response) {
-  return Incident.find({})
+  const inArr = request.query.status == undefined || request.query.status === 'all' ? ["open", "closed"] : [request.query.status];
+
+  return Incident.find({
+    "warning.status": { $in: inArr },
+  })
     .then((data) => response.send(data))
     .catch((error) => {
       response.json(error);
