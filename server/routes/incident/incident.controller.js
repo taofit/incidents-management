@@ -28,6 +28,7 @@ exports.create = function (request, response) {
     {
       "cinema.id": request.body.cinema.id,
       "screen.id": request.body.screen.id,
+      "assignee.id": request.body.assignee.id,
       "warning.errorCode": request.body.warning.errorCode,
       "warning.status": { $in: ["open", "progress"] },
     },
@@ -40,6 +41,7 @@ exports.create = function (request, response) {
         const incident = new Incident({
           cinema: request.body.cinema,
           screen: request.body.screen,
+          assignee: request.body.assignee,
           warning: request.body.warning,
         });
 

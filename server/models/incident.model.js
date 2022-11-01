@@ -19,8 +19,16 @@ const IncidentSchema = new mongoose.Schema(
         default: "open",
       },
     },
+    assignee: {
+      id: {type: String, required: false},
+      name: {type: String, required: false},
+    }
   },
   { timestamps: true }
 );
+
+IncidentSchema.methods.find = function find() {
+  
+}
 
 module.exports = mongoose.model("Incident", IncidentSchema);
