@@ -8,6 +8,8 @@ body {
 }
 table {
   background-color: #272727;
+  font-family: 'Roboto';
+  width: 100%;
 }
 .title {
   color: #3AC1C8;
@@ -17,13 +19,14 @@ table {
   font-size: 24px;
   line-height: 28px;
 }
-table caption {
+.caption {
   text-align: left;
   font-weight: bold;
   line-height: 40px;
+  background-color: #272727;
+  padding: 8px;
 }
 table thead tr td {
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -32,7 +35,6 @@ table thead tr td {
 }
 
 table tr {
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -49,8 +51,6 @@ table .id {
 .status-open {
   width: 16px;
   height: 16px;
-  left: 0px;
-  top: 4px;
   background-color: #FF657A;
   border-radius: 50%;
   display: inline-block;
@@ -58,8 +58,6 @@ table .id {
 .status-closed {
   width: 16px;
   height: 16px;
-  left: 0px;
-  top: 4px;
   background-color: #fff;
   border-radius: 50%;
   display: inline-block;
