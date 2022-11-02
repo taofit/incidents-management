@@ -7,7 +7,7 @@ exports.listOfAllIncidents = function (request, response) {
   let findObj = {}
 
   if (request.query.status) {
-    const inStatusArr = request.query.status === 'all' ? ["open", "closed"] : [request.query.status];
+    const inStatusArr = request.query.status === 'all' ? ["open", "closed", "progress"] : [request.query.status];
     findObj["warning.status"] = { $in: inStatusArr}
   }
   if (request.query.cinema) {
@@ -23,7 +23,7 @@ exports.listOfAllIncidents = function (request, response) {
       {"warning.errorDescription": {$regex: text}}]
     };
   }
-  
+
   return Incident.find(findObj)
     .then((data) => response.send(data))
     .catch((error) => {

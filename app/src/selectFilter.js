@@ -6,6 +6,7 @@ import AsyncSelect from 'react-select/async';
 const statusOptions = [
     { value: "open", label: "open"},
     { value: "closed", label: "closed"},
+    { value: "progress", label: "progress"},
     { value: "all", label: "all"},
   ]
   
