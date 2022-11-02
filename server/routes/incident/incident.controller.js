@@ -4,7 +4,8 @@ require("dotenv").config();
 
 //GET - http://localhost:4000/api/
 exports.listOfAllIncidents = function (request, response) {
-  const findObj = {}
+  let findObj = {}
+
   if (request.query.status) {
     const inStatusArr = request.query.status === 'all' ? ["open", "closed"] : [request.query.status];
     findObj["warning.status"] = { $in: inStatusArr}
@@ -13,6 +14,16 @@ exports.listOfAllIncidents = function (request, response) {
     findObj["cinema.id"] = request.query.cinema
   }
 
+  if (request.query.search) {
+    const text = request.query.search
+    findObj = { $or: [
+      {"cinema.name": {$regex: text}}, 
+      {"screen.id": {$regex: text}}, 
+      {"assignee.name": {$regex: text}}, 
+      {"warning.errorDescription": {$regex: text}}]
+    };
+  }
+  
   return Incident.find(findObj)
     .then((data) => response.send(data))
     .catch((error) => {
