@@ -32,12 +32,12 @@ const statusOptions = [
   }
   
   const App = ({onSelectChange}) => {
-    const [inputValue, setValue] = useState('');
+    const [cinemaInputValue, setCinemaInputValue] = useState('');
     const [selectedCinema, setSelectedCinema] = useState(null);
     const [selectedStatus, setSelectedStatus] = useState(null);
  
-    const handleInputChange = value => {
-        setValue(value);
+    const handleCinemaInputChange = value => {
+        setCinemaInputValue(value);
     };
  
     const handleCinemaChange = cinema => {
@@ -68,7 +68,7 @@ const statusOptions = [
                     loadOptions={loadOptions}
                     getOptionLabel={e => e.label}
                     getOptionValue={e => e.value}
-                    onInputChange={handleInputChange}
+                    onInputChange={handleCinemaInputChange}
                     onChange={handleCinemaChange}
                     />
                 </div>

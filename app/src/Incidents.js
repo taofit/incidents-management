@@ -2,6 +2,7 @@ import React from "react";
 import { Text } from "@cinemataztic/cine-ui";
 import { useState, useEffect } from "react";
 import Select from "./selectFilter";
+import Search from "./searchFilter";
 
 const DiffTime = (t) => {
     const dt = new Date(t)
@@ -50,11 +51,21 @@ const DiffTime = (t) => {
             setData(data)
         })
     }
+
+    const onSearchChange = (searchText) => {
+        fetch(`http://localhost:4000/incidents?search=${searchText}`)
+        .then(response => response.json())
+        .then(data => {
+            setLoading(false);
+            setData(data)
+        })
+    }
   
     return (
       <div className="bg-primary h-screen overflow-y-auto min-h-full px-4">
-        <div className="text-white rounded-xl h-auto p-5">
+        <div className="text-white rounded-xl h-auto p-5 titleWrapper">
           <Text className="title">All incidents</Text>
+          <Search onSearchChange={onSearchChange} />
         </div>
         {loading && <p>loading...</p>}
         {error && (<div>{`There is a problem fetching the post data- ${error}`}</div>)}

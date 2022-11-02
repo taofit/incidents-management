@@ -79,3 +79,13 @@ table .id {
   background-color: #272727;
   margin: 0 5px;
 }
+.react-select__control {
+  display: flex;
+}
+.titleWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+#search-box {
+  background-color: #494949;
+}
