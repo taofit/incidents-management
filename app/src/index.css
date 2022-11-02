@@ -66,3 +66,16 @@ table .id {
 .status-open span {
   margin-left: 20px;
 }
+
+.select {
+  display: flex;
+  justify-content: flex-end;
+}
+.select span {
+  color: #c9c9c9;
+}
+
+.react-select-container {
+  background-color: #272727;
+  margin: 0 5px;
+}

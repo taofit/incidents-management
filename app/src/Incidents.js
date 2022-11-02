@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "@cinemataztic/cine-ui";
 import { useState, useEffect } from "react";
-import Select from "react-select";
+import Select from "./selectFilter";
 
 const DiffTime = (t) => {
     const dt = new Date(t)
@@ -25,38 +25,6 @@ const DiffTime = (t) => {
     return Math.round(diffSecond / 60) + " min ago"
   }
 
-  const statusOptions = [
-    { value: "open", label: "open"},
-    { value: "closed", label: "closed"},
-    { value: "all", label: "all"},
-  ]
-  
-  const customStyles = {
-    option: (provided, state) => ({
-        ...provided,
-        borderBottom: '1px dotted pink',
-        color: state.isSelected ? 'white' : 'black',
-        padding: 10,
-        background: '#494949',
-      }),
-      control: () => ({
-        // none of react-select's styles are passed to <Control />
-        width: 200,
-    }),
-    singleValue: (provided, state) => {
-        const opacity = state.isDisabled ? 0.5 : 1;
-        const transition = 'opacity 300ms';
-        
-        return { ...provided, opacity, transition };
-    },
-    menu: () => ({
-        width:200,
-      }),
-      input: () => ({
-        color: 'black',
-      }),
-  }
-
   const App = () => {
     const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
@@ -71,15 +39,16 @@ const DiffTime = (t) => {
       })
     }, [])
   
-    const onSelectChange = (selectedOpt) => {
-        console.log(selectedOpt)
-        const value = selectedOpt.value
-        fetch(`http://localhost:4000/incidents?status=${value}`)
-      .then(response => response.json())
-      .then(data => {
-        setLoading(false);
-        setData(data)
-      })
+    const onSelectChange = (selectedCinema, selectedStatus) => {
+        const cinema = selectedCinema?.value ?? '';
+        const status = selectedStatus?.value ?? '';
+
+        fetch(`http://localhost:4000/incidents?status=${status}&cinema=${cinema}`)
+        .then(response => response.json())
+        .then(data => {
+            setLoading(false);
+            setData(data)
+        })
     }
   
     return (
@@ -92,11 +61,11 @@ const DiffTime = (t) => {
         <div className="tableWrapper">
         <div color="default" className="caption">
             Incidents
-            <Select options={statusOptions} styles={customStyles} width='200px' onChange={onSelectChange}/>
+            <Select onSelectChange={onSelectChange} />
         </div>
         <table>
             <thead>
-            <tr><td>ID</td><td>PROBLEM</td><td>CINEMA</td><td>ASSIGNEE</td><td>LAST ACTIVITY</td><td>CREATED</td><td>STATUS</td></tr>
+                <tr><td>ID</td><td>PROBLEM</td><td>CINEMA</td><td>ASSIGNEE</td><td>LAST ACTIVITY</td><td>CREATED</td><td>STATUS</td></tr>
             </thead> 
             <tbody>
             {data && 
