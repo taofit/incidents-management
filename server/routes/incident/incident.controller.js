@@ -4,17 +4,42 @@ require("dotenv").config();
 
 //GET - http://localhost:4000/api/
 exports.listOfAllIncidents = function (request, response) {
-  const inArr = request.query.status == undefined || request.query.status === 'all' ? ["open", "closed"] : [request.query.status];
+  const findObj = {}
+  if (request.query.status) {
+    const inStatusArr = request.query.status === 'all' ? ["open", "closed"] : [request.query.status];
+    findObj["warning.status"] = { $in: inStatusArr}
+  }
+  if (request.query.cinema) {
+    findObj["cinema.id"] = request.query.cinema
+  }
 
-  return Incident.find({
-    "warning.status": { $in: inArr },
-  })
+  return Incident.find(findObj)
     .then((data) => response.send(data))
     .catch((error) => {
       response.json(error);
     });
 };
 
+exports.listOfAllCinemas = function (request, response){
+  const nameStr = request.params.name
+  return Incident.find({
+    "cinema.name": {$regex: nameStr},
+  })
+      .select("cinema")
+      .then(data => {
+        const resultData = []
+        const tmpData = data.filter((element, index, self) => index === self.findIndex(t => (t.cinema.id === element.cinema.id)))
+        tmpData.forEach((element) => {
+          const id = element.cinema.id;
+          const name = element.cinema.name;
+          resultData.push({value: id, label: name})
+        })
+        response.send(resultData)
+      })
+      .catch(error => {
+        response.json(error)
+      })
+}
 //Get a single incident
 //GET - http://localhost:4000/api/613e537beff671450347cdaa
 exports.singleIncident = function (request, response) {

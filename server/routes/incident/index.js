@@ -3,6 +3,8 @@ const router = express.Router();
 const controller = require("./incident.controller");
 
 router.get("/", controller.listOfAllIncidents);
+router.get("/cinema/:name", controller.listOfAllCinemas);
+
 
 router.get("/:id", controller.singleIncident);
 
