@@ -58,9 +58,8 @@ const statusOptions = [
     };
 
     return (<div className="select">
-                <div>
-                <span>Cinema</span>
                 <AsyncSelect 
+                    placeholder={'Cinema'}
                     cacheOptions
                     defaultOptions
                     className="react-select-container" 
@@ -72,10 +71,8 @@ const statusOptions = [
                     onInputChange={handleCinemaInputChange}
                     onChange={handleCinemaChange}
                     />
-                </div>
-                <div>
-                <span>Status</span>
                 <Select 
+                    placeholder={'Status'}
                     className="react-select-container" 
                     classNamePrefix="react-select"
                     options={statusOptions} 
@@ -83,7 +80,7 @@ const statusOptions = [
                     onChange={handleStatusChange}
                     isSearchable={false}
                     />
-                </div>
+
             </div>)
 }
 
