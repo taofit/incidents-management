@@ -3,12 +3,12 @@ const mailer = require("../../email");
 require("dotenv").config();
 
 //GET - http://localhost:4000/api/
-exports.listOfAllIncidents = function (request, response) {
+exports.listOfIncidents = function (request, response) {
   let findObj = {}
 
   if (request.query.status) {
     const inStatusArr = request.query.status === 'all' ? ["open", "closed", "progress"] : [request.query.status];
-    findObj["warning.status"] = { $in: inStatusArr}
+    findObj["warning.status"] = { $in: inStatusArr }
   }
   if (request.query.cinema) {
     findObj["cinema.id"] = request.query.cinema
@@ -31,7 +31,7 @@ exports.listOfAllIncidents = function (request, response) {
     });
 };
 
-exports.listOfAllCinemas = function (request, response){
+exports.listOfCinemas = function (request, response){
   const nameStr = request.params.name
   return Incident.find({
     "cinema.name": {$regex: nameStr},

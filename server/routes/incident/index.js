@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const controller = require("./incident.controller");
 
-router.get("/", controller.listOfAllIncidents);
-router.get("/cinema/:name", controller.listOfAllCinemas);
+router.get("/", controller.listOfIncidents);
+router.get("/cinema/:name", controller.listOfCinemas);
 
 
 router.get("/:id", controller.singleIncident);
