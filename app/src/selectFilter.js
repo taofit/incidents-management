@@ -51,7 +51,7 @@ const statusOptions = [
         onSelectChange(selectedCinema, status)
     }
     const loadOptions = (inputValue) => {
-        if (inputValue.length > 0) {
+        if (inputValue.trim().length > 0) {
             return fetch(`http://localhost:4000/incidents/cinema/${inputValue}`).then(res => res.json());
         }
         return []
