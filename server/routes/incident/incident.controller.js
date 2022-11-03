@@ -38,12 +38,12 @@ exports.listOfAllCinemas = function (request, response){
   })
       .select("cinema")
       .then(data => {
-        const uniqueCinemaData = []
         const uniqueCinemas = data.filter((element, index, self) => index === self.findIndex(t => (t.cinema.id === element.cinema.id)))
-        uniqueCinemas.forEach((element) => {
+        const uniqueCinemaData = uniqueCinemas.map((element) => {
           const id = element.cinema.id;
           const name = element.cinema.name;
-          uniqueCinemaData.push({value: id, label: name})
+          
+          return {value: id, label: name}
         })
         response.send(uniqueCinemaData)
       })
