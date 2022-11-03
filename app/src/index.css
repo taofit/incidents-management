@@ -80,6 +80,8 @@ table .id {
 }
 .react-select__control {
   display: flex;
+  height: 45px;
+  border-radius: 7px;
 }
 .titleWrapper {
   display: flex;
@@ -87,4 +89,6 @@ table .id {
 }
 #search-box {
   background-color: #494949;
+  border-radius: 7px;
+  padding: 5px;
 }
