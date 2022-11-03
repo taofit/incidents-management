@@ -38,14 +38,14 @@ exports.listOfAllCinemas = function (request, response){
   })
       .select("cinema")
       .then(data => {
-        const resultData = []
-        const tmpData = data.filter((element, index, self) => index === self.findIndex(t => (t.cinema.id === element.cinema.id)))
-        tmpData.forEach((element) => {
+        const uniqueCinemaData = []
+        const uniqueCinemas = data.filter((element, index, self) => index === self.findIndex(t => (t.cinema.id === element.cinema.id)))
+        uniqueCinemas.forEach((element) => {
           const id = element.cinema.id;
           const name = element.cinema.name;
-          resultData.push({value: id, label: name})
+          uniqueCinemaData.push({value: id, label: name})
         })
-        response.send(resultData)
+        response.send(uniqueCinemaData)
       })
       .catch(error => {
         response.json(error)

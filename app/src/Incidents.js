@@ -20,6 +20,7 @@ const DiffTime = (t) => {
   
     if (diffSecond > secondsAHour) {
       const hours = Math.floor(diffSecond / secondsAHour)
+
       return hours > 1 ? hours + " hours ago" : hours + " hour ago"
     }
   
@@ -68,7 +69,7 @@ const DiffTime = (t) => {
           <Search onSearchChange={onSearchChange} />
         </div>
         {loading && <p>loading...</p>}
-        {error && (<div>{`There is a problem fetching the post data- ${error}`}</div>)}
+        {error && (<div>{`There is a problem fetching the incidents data- ${error}`}</div>)}
         <div className="tableWrapper">
         <div color="default" className="caption">
             Incidents

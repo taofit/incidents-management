@@ -80,7 +80,6 @@ const statusOptions = [
                     onChange={handleStatusChange}
                     isSearchable={false}
                     />
-
             </div>)
 }
 
