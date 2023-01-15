@@ -9,18 +9,18 @@ Examples:
 Whenever something goes wrong with the machines in the cinema, we need to know as soon as possible. Right now we don’t have a central place in our cloud platform to view all these kinds of problems with the machines. This sometimes results in the cinema crew or even worse, the cinema goers, discovering the problem before we do. This is especially bad, if it’s a problem we could have discovered by continuously monitoring the equipment on simple parameters like screen resolution or download status. 
 
 #### Objectives: 
-1. Provide a better overview with alerts of problems on our web-based admin platform. This is handled front-end  only for now. It should be tracked server side as well, so the right people can be alerted fast. Right now we have to wait for someone to log into cloud and notice the errors. 
-2. Track incidents: when a machine goes into a failed state (e.g. wrong resolution or game download errors) the starttime of this incident state should be noted. 
+1. Provide a better overview with alerts of problems on our web-based admin platform. This is handled front-end only for now. It should be tracked server side as well, so the right people can be alerted fast. Right now we have to wait for someone to log into cloud and notice the errors. 
+2. Track incidents: when a machine goes into a failed state (e.g. wrong resolution or game download errors) the start time of this incident state should be noted. 
 3. Notify as fast as possible: someone should be notified about this incident, so they have a better chance of fixing it before next show.
 
 ## Scope
 The incident management system should only care about tracking the status of the incidents. It does not monitor other services for incidents, but rather wait for other systems to report when a new condition starts that should result in a new incident. 
 
 ### Specs
-1. Track incidents: open, inprogress, closed
+1. Track incidents: open, inProgress, closed
 2. Notify by e-mail when a new incident is opened
 3. Provide endpoints (or event listeners) allowing other services to open and close incidents
-4. Provide endpoints allowing a web-based UI to visualise the tickets
+4. Provide endpoints allowing a web-based UI to visualize the tickets
 5. Timeline for each incident:
    1. Comments from human agents
    2. Status updates from systems (e.g. reopened by automatic monitoring agent)
