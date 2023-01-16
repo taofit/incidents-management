@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Select from "react-select";
 import AsyncSelect from 'react-select/async';
 
@@ -9,15 +9,15 @@ const statusOptions = [
     { value: "progress", label: "progress"},
     { value: "all", label: "all"},
   ]
-  
-  const customStyles = {
+
+const customStyles = {
     option: (provided, state) => ({
         ...provided,
         borderBottom: '1px dotted pink',
         color: state.isSelected ? 'white' : 'black',
         padding: 7,
         background: '#494949',
-      }),
+        }),
     control: () => ({
         background: '#494949',
     }),
@@ -30,13 +30,14 @@ const statusOptions = [
     input: () => ({
         color: 'black',
     }),
-  }
+}
   
   const App = ({onSelectChange}) => {
     const [cinemaInputValue, setCinemaInputValue] = useState('');
     const [selectedCinema, setSelectedCinema] = useState(null);
     const [selectedStatus, setSelectedStatus] = useState(null);
- 
+    const selectRef = useRef(null);
+
     const handleCinemaInputChange = value => {
         setCinemaInputValue(value);
     };
@@ -56,6 +57,9 @@ const statusOptions = [
         }
         return []
     };
+    const clearValue = () => {
+        selectRef.current.clearValue();
+    }
 
     return (<div className="select">
                 <AsyncSelect 
@@ -70,7 +74,9 @@ const statusOptions = [
                     getOptionValue={e => e.value}
                     onInputChange={handleCinemaInputChange}
                     onChange={handleCinemaChange}
+                    ref={selectRef}
                     />
+                <button onClick={clearValue}>clear</button>
                 <Select 
                     placeholder={'Status'}
                     className="react-select-container" 

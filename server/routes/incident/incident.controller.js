@@ -73,7 +73,7 @@ exports.create = function (request, response) {
       "warning.status": { $in: ["open", "progress"] },
     },
     (err, obj) => {
-      if (obj.length !== 0 && !err) {
+      if (obj?.length !== 0 && !err) {
         console.log("Incident already exists");
         response.status(409);
         response.send("Incident already exists");
